@@ -26,12 +26,23 @@
 #include "HiggsAnalysis/CombinedLimit/interface/AtlasPdfs.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf_phase.h"
+#include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooHighmass_1D.h"
+#include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooHighmass.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf_2D.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HWWLVJJRooPdfs.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooMomentMorphND.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooMorphingPdf.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooParametricHist.h"
 #include "HiggsAnalysis/CombinedLimit/interface/GaussExp.h"
+#include "HiggsAnalysis/CombinedLimit/interface/RooNCSplinePdf_1D_fast.h"
+#include "HiggsAnalysis/CombinedLimit/interface/RooNCSplinePdf_2D_fast.h"
+#include "HiggsAnalysis/CombinedLimit/interface/RooNCSplinePdf_3D_fast.h"
+#include "HiggsAnalysis/CombinedLimit/interface/RooNCSplinePdfCore.h"
+#include "HiggsAnalysis/CombinedLimit/interface/Width_integral.h"
+#include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_onshell_2D.h"
+#include "HiggsAnalysis/CombinedLimit/interface/NCSplinePdfFactory_1D.h"
+#include "HiggsAnalysis/CombinedLimit/interface/NCSplinePdfFactory_2D.h"
+#include "HiggsAnalysis/CombinedLimit/interface/NCSplinePdfFactory_3D.h"
 
 namespace {
     struct dictionary {

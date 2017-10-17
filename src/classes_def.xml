@@ -13,6 +13,8 @@
 	<class name="FastVerticalInterpHistPdfBase" />
 	<class name="FastVerticalInterpHistPdfBase::Morph" />
 	<class name="HZZ4L_RooSpinZeroPdf" />
+	<class name="HZZ4L_RooHighmass_1D" />
+	<class name="HZZ4L_RooHighmass" />
 	<class name="HZZ4L_RooSpinZeroPdf_2D" />
 	<class name="HZZ4L_RooSpinZeroPdf_phase" />
 	<class name="ProcessNormalization" />
@@ -114,10 +116,19 @@
 	<class name="TH1Keys" />
 	<class name="Triangle" />
 	<class name="VerticalInterpHistPdf" />
+	<class name="RooNCSplinePdf_1D_fast" />
+	<class name="RooNCSplinePdf_2D_fast" />
+	<class name="RooNCSplinePdf_3D_fast" />
+	<class name="RooNCSplinePdfCore" />
+	<class name="Width_integral" />
 	<class name="VerticalInterpPdf" />
 	<class name="GaussExp" />
+	<class name="HZZ4L_onshell_2D" />
 	<class name="RooParametricHist" />
 	<class name="RooMorphingPdf" />
+	<class name="NCSplinePdfFactory_1D" />
+	<class name="NCSplinePdfFactory_2D" />
+	<class name="NCSplinePdfFactory_3D" />
         <function name="function th1fmorph" />
 
 	<class name="CombDataSetFactory"  transient="true" />
