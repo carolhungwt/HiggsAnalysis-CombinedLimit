@@ -31,13 +31,11 @@
 #include "HiggsAnalysis/CombinedLimit/interface/AtlasPdfs.h"
 #include "HiggsAnalysis/CombinedLimit/interface/FastTemplateFunc.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf.h"
-<<<<<<< HEAD
+
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf_phase.h"
-#include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooHighmass_1D.h"
-#include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooHighmass.h"
-=======
+
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf_1D.h"
->>>>>>> usarica/splinepdfs
+
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf_2D.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf_phase.h"
 #include "HiggsAnalysis/CombinedLimit/interface/VBFHZZ4L_RooSpinZeroPdf.h"
@@ -53,17 +51,9 @@
 #include "HiggsAnalysis/CombinedLimit/interface/RooMorphingPdf.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooParametricHist.h"
 #include "HiggsAnalysis/CombinedLimit/interface/GaussExp.h"
-<<<<<<< HEAD
-#include "HiggsAnalysis/CombinedLimit/interface/RooNCSplinePdf_1D_fast.h"
-#include "HiggsAnalysis/CombinedLimit/interface/RooNCSplinePdf_2D_fast.h"
-#include "HiggsAnalysis/CombinedLimit/interface/RooNCSplinePdf_3D_fast.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooNCSplinePdfCore.h"
 #include "HiggsAnalysis/CombinedLimit/interface/Width_integral.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_onshell_2D.h"
-#include "HiggsAnalysis/CombinedLimit/interface/NCSplinePdfFactory_1D.h"
-#include "HiggsAnalysis/CombinedLimit/interface/NCSplinePdfFactory_2D.h"
-#include "HiggsAnalysis/CombinedLimit/interface/NCSplinePdfFactory_3D.h"
-=======
 #include "HiggsAnalysis/CombinedLimit/interface/RooDoubleCBFast.h"
 #include "HiggsAnalysis/CombinedLimit/interface/CMSHistFunc.h"
 #include "HiggsAnalysis/CombinedLimit/interface/CMSHistErrorPropagator.h"
@@ -74,7 +64,7 @@
 #include "HiggsAnalysis/CombinedLimit/interface/RooNCSpline_2D_fast.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooNCSpline_3D_fast.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooFuncPdf.h"
->>>>>>> usarica/splinepdfs
+
 
 namespace {
     struct dictionary {

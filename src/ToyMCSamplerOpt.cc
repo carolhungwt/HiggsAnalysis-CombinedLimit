@@ -135,12 +135,9 @@ toymcoptutils::SinglePdfGenInfo::generateAsimov(RooRealVar *&weightVar, double w
     if (mode_ == Counting) return generateCountingAsimov();
     int nPA = runtimedef::get("TMCSO_PseudoAsimov");  // Will trigger the use of weighted data 
     int boostAPA = runtimedef::get("TMCSO_AdaptivePseudoAsimov");
-<<<<<<< HEAD
+
     cout<< "TMCSO_PseudoAsimov " << nPA<<"\t"<< "TMCSO_AdaptivePseudoAsimov "<< boostAPA<<endl;
     if (observables_.getSize() > 1 && boostAPA) {
-=======
-    if (boostAPA>0) {  // trigger adaptive PA (setting boostAPA=1 will just use internal logic)
->>>>>>> usarica/splinepdfs
         int nbins = 1;
         RooLinkedListIter iter = observables_.iterator(); 
         for (RooAbsArg *a = (RooAbsArg *) iter.Next(); a != 0; a = (RooAbsArg *) iter.Next()) {
