@@ -6,11 +6,25 @@ void vectorized::mul_add(const uint32_t size, double coeff, double const * __res
         oarray[i] += coeff * iarray[i];
     } 
 }
+
+void vectorized::mul_add_sqr(const uint32_t size, double coeff, double const * __restrict__ iarray, double* __restrict__ oarray) {
+    for (uint32_t i = 0; i < size; ++i) {
+        oarray[i] += (coeff * coeff * iarray[i] * iarray[i]);
+    } 
+}
+
 void vectorized::mul_inplace(const uint32_t size, double const * __restrict__ iarray, double* __restrict__ oarray) {
     for (uint32_t i = 0; i < size; ++i) {
         oarray[i] *= iarray[i];
     } 
 }
+
+void vectorized::sqrt(const uint32_t size, double const * __restrict__ iarray, double* __restrict__ oarray) {
+    for (uint32_t i = 0; i < size; ++i) {
+        oarray[i] = std::sqrt(iarray[i]);
+    }
+}
+
 
 double vectorized::nll_reduce(const uint32_t size, double* __restrict__ pdfvals, double const * __restrict__ weights, double sumcoeff,  double *  __restrict__ workingArea) {
     double invsum = 1.0/sumcoeff;
@@ -25,7 +39,7 @@ double vectorized::nll_reduce(const uint32_t size, double* __restrict__ pdfvals,
     }
 
 
-    DefaultAccumulator ret = 0;
+    DefaultAccumulator<double> ret = 0;
     for (uint32_t i = 0; i < size; ++i) {
         ret += pdfvals[i];
     }
@@ -68,7 +82,7 @@ void vectorized::powers(const uint32_t size, double exponent, double norm, const
 }
 
 double vectorized::dot_product(const uint32_t size, double const * __restrict__ vec1, double const *  __restrict__ vec2) {
-    DefaultAccumulator ret = 0;
+    DefaultAccumulator<double> ret = 0;
     for (uint32_t i = 0; i < size; ++i) {
         ret += vec1[i]*vec2[i];
     }

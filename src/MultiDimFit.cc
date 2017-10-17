@@ -3,12 +3,14 @@
 #include <cmath>
 
 #include "TMath.h"
+#include "TFile.h"
 #include "RooArgSet.h"
 #include "RooArgList.h"
 #include "RooRandom.h"
 #include "RooAbsData.h"
 #include "RooCategory.h"
 #include "RooFitResult.h"
+#include "HiggsAnalysis/CombinedLimit/interface/Accumulators.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooMinimizerOpt.h"
 #include <RooStats/ModelConfig.h>
 #include "HiggsAnalysis/CombinedLimit/interface/Combine.h"
@@ -23,6 +25,7 @@
 
 using namespace RooStats;
 
+std::string MultiDimFit::name_ = "";
 MultiDimFit::Algo MultiDimFit::algo_ = None;
 MultiDimFit::GridType MultiDimFit::gridType_ = G1x1;
 std::vector<std::string>  MultiDimFit::poi_;
@@ -34,6 +37,7 @@ unsigned int MultiDimFit::points_ = 50;
 unsigned int MultiDimFit::firstPoint_ = 0;
 unsigned int MultiDimFit::lastPoint_  = std::numeric_limits<unsigned int>::max();
 bool MultiDimFit::floatOtherPOIs_ = false;
+bool MultiDimFit::includePOIEdges_ = false;
 unsigned int MultiDimFit::nOtherFloatingPoi_ = 0;
 bool MultiDimFit::fastScan_ = false;
 bool MultiDimFit::loadedSnapshot_ = false;
@@ -42,6 +46,8 @@ bool MultiDimFit::startFromPreFit_ = false;
 bool MultiDimFit::hasMaxDeltaNLLForProf_ = false;
 bool MultiDimFit::squareDistPoiStep_ = false;
 bool MultiDimFit::skipInitialFit_ = false;
+bool MultiDimFit::saveFitResult_ = false;
+bool MultiDimFit::subtractNLL0_ = false;
 float MultiDimFit::maxDeltaNLLForProf_ = 200;
 float MultiDimFit::autoRange_ = -1.0;
 std::string MultiDimFit::fixedPointPOIs_ = "";
@@ -75,6 +81,7 @@ MultiDimFit::MultiDimFit() :
         ("points",  boost::program_options::value<unsigned int>(&points_)->default_value(points_), "Points to use for grid or contour scans")
         ("firstPoint",  boost::program_options::value<unsigned int>(&firstPoint_)->default_value(firstPoint_), "First point to use")
         ("lastPoint",  boost::program_options::value<unsigned int>(&lastPoint_)->default_value(lastPoint_), "Last point to use")
+        ("includePOIEdges", boost::program_options::value<bool>(&includePOIEdges_)->default_value(includePOIEdges_), "Use POI bin boundaries instead of bin centers in the scan (points->points+1)")
         ("autoRange", boost::program_options::value<float>(&autoRange_)->default_value(autoRange_), "Set to any X >= 0 to do the scan in the +/- X sigma range (where the sigma is from the initial fit, so it may be fairly approximate)")
 	("fixedPointPOIs",   boost::program_options::value<std::string>(&fixedPointPOIs_)->default_value(""), "Parameter space point for --algo=fixed")
         ("fastScan", "Do a fast scan, evaluating the likelihood without profiling it.")
@@ -84,7 +91,9 @@ MultiDimFit::MultiDimFit() :
 	("saveSpecifiedIndex",   boost::program_options::value<std::string>(&saveSpecifiedIndex_)->default_value(""), "Save specified indexes/discretes (default = none)")
 	("saveInactivePOI",   boost::program_options::value<bool>(&saveInactivePOI_)->default_value(saveInactivePOI_), "Save inactive POIs in output (1) or not (0, default)")
 	("startFromPreFit",   boost::program_options::value<bool>(&startFromPreFit_)->default_value(startFromPreFit_), "Start each point of the likelihood scan from the pre-fit values")
-       ;
+        ("subtractNLL0", boost::program_options::value<bool>(&subtractNLL0_)->default_value(subtractNLL0_), "Subtract the NLL value at the initial scan point from the NLL at all points (default: true)")
+	("saveFitResult",  "Save RooFitResult to muiltidimfit.root")
+      ;
 }
 
 void MultiDimFit::applyOptions(const boost::program_options::variables_map &vm) 
@@ -119,6 +128,8 @@ void MultiDimFit::applyOptions(const boost::program_options::variables_map &vm)
     hasMaxDeltaNLLForProf_ = !vm["maxDeltaNLLForProf"].defaulted();
     loadedSnapshot_ = !vm["snapshotName"].defaulted();
     savingSnapshot_ = (!loadedSnapshot_) && vm.count("saveWorkspace");
+    name_ = vm["name"].defaulted() ?  std::string() : vm["name"].as<std::string>();
+    saveFitResult_ = (vm.count("saveFitResult") > 0);
 }
 
 bool MultiDimFit::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) { 
@@ -154,7 +165,15 @@ bool MultiDimFit::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooS
     std::auto_ptr<RooFitResult> res;
     if (verbose <= 3) RooAbsReal::setEvalErrorLoggingMode(RooAbsReal::CountErrors);
     if ( !skipInitialFit_){
-        res.reset(doFit(pdf, data, ((algo_ == Singles || algo_ == Impact) ? poiList_ : RooArgList()), constrainCmdArg, false, 1, true, false));
+        bool doHesse = (algo_ == Singles || algo_ == Impact) || (saveFitResult_) ;
+        res.reset(doFit(pdf, data, (doHesse ? poiList_ : RooArgList()), constrainCmdArg, false, 1, true, false));
+        if (!res.get()) {
+            std::cout << "\n " <<std::endl;
+            std::cout << "\n ---------------------------" <<std::endl;
+            std::cout << "\n WARNING: MultiDimFit failed" <<std::endl;
+            std::cout << "\n ---------------------------" <<std::endl;
+            std::cout << "\n " <<std::endl;
+        }
         if (algo_ == Impact && res.get()) {
             // Set the floating parameters back to the best-fit value
             // before we write an entry into the output TTree
@@ -212,8 +231,9 @@ bool MultiDimFit::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooS
                     printf("   %*s :  %+8.3f\n", len, poi_[i].c_str(), poiVals_[i]);
                 }
             }
+            if(res.get() && saveFitResult_) saveResult(*res);
             break;
-        case Singles: if (res.get()) doSingles(*res); break;
+        case Singles: if (res.get()) { doSingles(*res); if (saveFitResult_) {saveResult(*res);} } break;
         case Cross: doBox(*nll, cl, "box", true); break;
         case Grid: doGrid(w,*nll); break;
         case RandomPoints: doRandomPoints(w,*nll); break;
@@ -501,26 +521,37 @@ void MultiDimFit::doGrid(RooWorkspace *w, RooAbsReal &nll)
     //snap.Print("V");
     if (n == 1) {
 	// can do a more intellegent spacing of points
-	double xbestpoint = (p0[0] - pmin[0]) / ((pmax[0]-pmin[0])/points_) ;
-	if ( lastPoint_ == std::numeric_limits<unsigned int>::max()) lastPoint_ = points_-1;
-        for (unsigned int i = 0; i < points_; ++i) {
+  double deltaX = (pmax[0] - pmin[0])/((double)points_);
+  double xbestpoint = (p0[0] - pmin[0]) / deltaX;
+  if (lastPoint_ == std::numeric_limits<unsigned int>::max()) lastPoint_ = points_;
+  if (!includePOIEdges_) lastPoint_--;
+        for (unsigned int i = 0; i <= points_; ++i) {
+            if (i==points_ && !includePOIEdges_) continue;
             if (i < firstPoint_) continue;
             if (i > lastPoint_)  break;
-            double x =  pmin[0] + (i+0.5)*(pmax[0]-pmin[0])/points_; 
-	    if( xbestpoint > lastPoint_ ){
-		int ireverse = lastPoint_ - i + firstPoint_ ;
-		x = pmin[0] + (ireverse+0.5)*(pmax[0]-pmin[0])/points_; 
-	    }
 
-	    if (squareDistPoiStep_){
-		// distance between steps goes as ~square of distance from middle or range (could this be changed to from best fit value?)
-		double phalf = (pmax[0]-pmin[0])/2;
-		if (i<(unsigned int)points_/2) x = pmin[0]+TMath::Sqrt(2*i*(phalf)*(phalf)/points_);
-		else x = pmax[0]-TMath::Sqrt(2*(points_-i)*(phalf)*(phalf)/points_);
-	    }
+            double x;
+            {
+              DefaultAccumulator<double> xacc = pmin[0];
+              if (squareDistPoiStep_){
+                // distance between steps goes as ~square of distance from middle or range (could this be changed to from best fit value?)
+                double phalf = (pmax[0]-pmin[0])/2;
+                if (i<(unsigned int)points_/2) xacc += TMath::Sqrt(2*i*(phalf)*(phalf)/points_);
+                else x += -TMath::Sqrt(2*(points_-i)*(phalf)*(phalf)/points_);
+              }
+              else{
+                if (!includePOIEdges_) xacc += deltaX*0.5;
+                if (xbestpoint > lastPoint_){
+                  int ireverse = lastPoint_ - i + firstPoint_;
+                  xacc += ((double)ireverse)*deltaX;
+                }
+                else xacc += ((double)i)*deltaX;
+              }
+              x = xacc.sum();
+            }
 
             //if (verbose > 1) std::cout << "Point " << i << "/" << points_ << " " << poiVars_[0]->GetName() << " = " << x << std::endl;
-             std::cout << "Point " << i << "/" << points_ << " " << poiVars_[0]->GetName() << " = " << x << std::endl;
+            std::cout << "Point " << i << "/" << points_ << " " << poiVars_[0]->GetName() << " = " << x << std::endl;
             *params = snap; 
             poiVals_[0] = x;
             poiVars_[0]->setVal(x);
@@ -563,17 +594,42 @@ void MultiDimFit::doGrid(RooWorkspace *w, RooAbsReal &nll)
         RooAbsReal::setEvalErrorLoggingMode(RooAbsReal::CountErrors);
         CloseCoutSentry sentry(verbose < 2);
         double deltaX =  (pmax[0]-pmin[0])/sqrn, deltaY = (pmax[1]-pmin[1])/sqrn;
-        for (unsigned int i = 0; i < sqrn; ++i) {
-            for (unsigned int j = 0; j < sqrn; ++j, ++ipoint) {
+        for (unsigned int i = 0; i <= sqrn; ++i) {
+            if (i==sqrn && !includePOIEdges_) continue;
+            for (unsigned int j = 0; j <= sqrn; ++j, ++ipoint) {
+                if (j==sqrn && !includePOIEdges_) continue;
                 if (ipoint < firstPoint_) continue;
                 if (ipoint > lastPoint_)  break;
-                *params = snap; 
-                double x =  pmin[0] + (i+0.5)*deltaX; 
-                double y =  pmin[1] + (j+0.5)*deltaY; 
+                *params = snap;
+
+                double x, y;
+                {
+                  DefaultAccumulator<double> xacc = pmin[0];
+                  DefaultAccumulator<double> yacc = pmin[1];
+                  if (!includePOIEdges_){
+                    xacc += deltaX*0.5;
+                    yacc += deltaY*0.5;
+                  }
+                  xacc += ((double)i)*deltaX;
+                  yacc += ((double)j)*deltaY;
+                  x = xacc.sum();
+                  y = yacc.sum();
+                }
+
                 if (verbose && (ipoint % nprint == 0)) {
                          fprintf(sentry.trueStdOut(), "Point %d/%d, (i,j) = (%d,%d), %s = %f, %s = %f\n",
                                         ipoint,sqrn*sqrn, i,j, poiVars_[0]->GetName(), x, poiVars_[1]->GetName(), y);
                 }
+                /*
+                // shift points at the edge |x|+|y|=1
+                if( fabs(x)+fabs(y)>(1.-deltaX/2.) && fabs(x)+fabs(y)<(1.+deltaX/2.) )// consider that deltaX=deltaY
+                {
+                    if(x>0.) x -= 0.00001;
+                    else if(x<0.) x += 0.00001;
+                    if(y>0.) y -= 0.00001;
+                    else if(y<0.) y += 0.00001;
+                }
+                */
                 poiVals_[0] = x;
                 poiVals_[1] = y;
                 poiVars_[0]->setVal(x);
@@ -831,7 +887,7 @@ void MultiDimFit::doFixedPoint(RooWorkspace *w, RooAbsReal &nll)
 	    bool ok = minim.minimize(verbose-1);
 	    if (ok) {
 		    nll0Value_ = nll0;
-		    nllValue_ = nll.getVal();
+		    nllValue_ = nll.getVal() - (subtractNLL0_ ? nll0 : 0);
 		    deltaNLL_ = nll.getVal() - nll0;
 		    double qN = 2*(nll.getVal() - nll0);
 		    double prob = ROOT::Math::chisquared_cdf_c(qN, n+nOtherFloatingPoi_);
@@ -1010,4 +1066,12 @@ void MultiDimFit::doBox(RooAbsReal &nll, double cl, const char *name, bool commi
         xv->setConstant(false);
     }
     verbose++; // restore verbosity 
+}
+
+void MultiDimFit::saveResult(RooFitResult &res) {
+    if (verbose>2) res.Print("V");
+    fitOut.reset(TFile::Open(("multidimfit"+name_+".root").c_str(), "RECREATE"));
+    fitOut->WriteTObject(&res,"fit_mdf");
+    fitOut->cd();
+    fitOut.release()->Close();
 }

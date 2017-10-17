@@ -3,53 +3,73 @@
 
 #include <vector>
 
-class NaiveAccumulator {
+template <typename T> class NaiveAccumulator {
     public:
-        NaiveAccumulator(const double & value = 0) : sum_(value) {}
-        NaiveAccumulator & operator+=(const double &inc) { sum_ += inc; return *this;  }
-        NaiveAccumulator & operator-=(const double &inc) { sum_ -= inc; return *this; }
-        double sum() const { return sum_; } 
-    private:
-        double sum_;
+        NaiveAccumulator(const T & value = 0) : sum_(value) {}
+        NaiveAccumulator(const NaiveAccumulator<T>& other) : sum_(other.sum_){}
+        NaiveAccumulator& operator+=(const T& inc){ sum_ += inc; return *this; }
+        NaiveAccumulator& operator-=(const T& inc){ sum_ -= inc; return *this; }
+        NaiveAccumulator& operator*=(const T& inc){ sum_ *= inc; return *this; }
+        NaiveAccumulator& operator/=(const T& inc){ sum_ /= inc; return *this; }
+        NaiveAccumulator operator+(const T& inc){ NaiveAccumulator<T> tmp(*this);  tmp += inc; return tmp; }
+        NaiveAccumulator operator-(const T& inc){ NaiveAccumulator<T> tmp(*this);  tmp -= inc; return tmp; }
+        NaiveAccumulator operator*(const T& inc){ NaiveAccumulator<T> tmp(*this);  tmp *= inc; return tmp; }
+        NaiveAccumulator operator/(const T& inc){ NaiveAccumulator<T> tmp(*this);  tmp /= inc; return tmp; }
+        T sum() const { return sum_; }
+        operator T() const { return sum_; }
+    protected:
+        T sum_;
 };
 
-class KahanAccumulator {
+template <typename T> class KahanAccumulator {
     public:
-        KahanAccumulator(const double & value = 0) : sum_(value), compensation_(0) {}
-        void operator+=(const double &inc) { 
-            double y = inc - compensation_;
-            double sumnew = sum_ + y;
-            double sumerr = ( sumnew - sum_ );
-            compensation_ = sumerr - y;
-            sum_ = sumnew; 
+        KahanAccumulator() : sum_(0), compensation_(0) {}
+        KahanAccumulator(const T& value) : sum_(value), compensation_(0) {}
+        KahanAccumulator(const KahanAccumulator<T>& other) : sum_(other.sum_), compensation_(other.compensation_){}
+        KahanAccumulator& operator+=(const T& inc){
+          T y = inc - compensation_;
+          T sumnew = sum_ + y;
+          T sumerr = (sumnew - sum_);
+          compensation_ = sumerr - y;
+          sum_ = sumnew;
+          return *this;
         }
-        void operator-=(const double &inc) { this->operator+=(-inc); }
-        double sum() const { return sum_; } 
-    private:
-        double sum_, compensation_;
+        KahanAccumulator& operator-=(const T& inc){ this->operator+=(-inc); return *this; }
+        KahanAccumulator& operator*=(const T& inc){ sum_ *= inc; compensation_ *= inc; return *this; }
+        KahanAccumulator& operator/=(const T& inc){ sum_ /= inc; compensation_ /= inc; return *this; }
+        KahanAccumulator operator+(const T& inc){ KahanAccumulator<T> tmp(*this);  tmp += inc; return tmp; }
+        KahanAccumulator operator-(const T& inc){ KahanAccumulator<T> tmp(*this);  tmp -= inc; return tmp; }
+        KahanAccumulator operator*(const T& inc){ KahanAccumulator<T> tmp(*this);  tmp *= inc; return tmp; }
+        KahanAccumulator operator/(const T& inc){ KahanAccumulator<T> tmp(*this);  tmp /= inc; return tmp; }
+        T sum() const { return sum_; }
+        operator T() const { return sum_; }
+    protected:
+        T sum_, compensation_;
 };
 
-template<typename A>
-inline double sumWith(const std::vector<double> & vals) {
+template<typename T, class A> inline T sumWith(const std::vector<T> & vals) {
     A ret = 0;
-    for (const double & v : vals) ret += v;
+    for (const T& v : vals) ret += v;
     return ret.sum();
 }
 
-typedef KahanAccumulator PreciseAccumulator;
-typedef NaiveAccumulator FastAccumulator;
-typedef PreciseAccumulator DefaultAccumulator;
+template<typename T> using PreciseAccumulator = KahanAccumulator<T>;
+template<typename T> using FastAccumulator = NaiveAccumulator<T>;
+template<typename T> using DefaultAccumulator = PreciseAccumulator<T>;
 
-inline double sumPrecise(const std::vector<double> & vals) {
-    return sumWith<PreciseAccumulator>(vals);
+template<typename T> inline T sumPrecise(const std::vector<T, std::allocator<T>> & vals) {
+    T ret = sumWith<T, PreciseAccumulator<T>>(vals);
+    return ret;
 }
 
-inline double sumFast(const std::vector<double> & vals) {
-    return sumWith<FastAccumulator>(vals);
+template<typename T> inline T sumFast(const std::vector<T, std::allocator<T>> & vals) {
+    T ret = sumWith<T, FastAccumulator<T>>(vals);
+    return ret;
 }
 
-inline double sumDefault(const std::vector<double> & vals) {
-    return sumWith<DefaultAccumulator>(vals);
+template<typename T> inline T sumDefault(const std::vector<T, std::allocator<T>> & vals) {
+    T ret = sumWith<T, DefaultAccumulator<T>>(vals);
+    return ret;
 }
 
 #endif
