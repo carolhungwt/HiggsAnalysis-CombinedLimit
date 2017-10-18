@@ -1,4 +1,5 @@
 #include "HiggsAnalysis/CombinedLimit/interface/TestProposal.h"
+#include "HiggsAnalysis/CombinedLimit/interface/HZZ2L2QRooPdfs.h"
 #include "HiggsAnalysis/CombinedLimit/interface/DebugProposal.h"
 #include "HiggsAnalysis/CombinedLimit/interface/VerticalInterpPdf.h"
 #include "HiggsAnalysis/CombinedLimit/interface/VerticalInterpHistPdf.h"
@@ -14,7 +15,7 @@
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooCTauPdf_2D.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4LRooPdfs.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HWWLVJRooPdfs.h"
-#include "HiggsAnalysis/CombinedLimit/interface/HZZ2L2QRooPdfs.h"
+
 #include "HiggsAnalysis/CombinedLimit/interface/HGGRooPdfs.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HZGRooPdfs.h"
 #include "HiggsAnalysis/CombinedLimit/interface/SequentialMinimizer.h"
@@ -58,13 +59,15 @@
 #include "HiggsAnalysis/CombinedLimit/interface/CMSHistFunc.h"
 #include "HiggsAnalysis/CombinedLimit/interface/CMSHistErrorPropagator.h"
 #include "HiggsAnalysis/CombinedLimit/interface/CMSHistFuncWrapper.h"
-
+#include "HiggsAnalysis/CombinedLimit/interface/Width_conv.h"
+//#include "HiggsAnalysis/CombinedLimit/interface/Width_conv_offshell.h"
+//#include "HiggsAnalysis/CombinedLimit/interface/Width_conv_integral.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooNCSplineCore.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooNCSpline_1D_fast.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooNCSpline_2D_fast.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooNCSpline_3D_fast.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooFuncPdf.h"
-
+#include "HiggsAnalysis/CombinedLimit/interface/SplinePdf.h"
 
 namespace {
     struct dictionary {
