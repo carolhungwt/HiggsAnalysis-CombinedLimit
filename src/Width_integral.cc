@@ -20,7 +20,7 @@
 #include "RooHistFunc.h" 
 
 ClassImp(Width_integral) 
-
+	Width_integral::Width_integral() {}
 	Width_integral::Width_integral(const char *name, const char *title, 
 			 RooAbsReal& _a, RooAbsReal& _b,  const RooArgList& inCoefList) :
 		RooAbsReal(name,title), 
