@@ -68,7 +68,12 @@
 	<class name="HZZ4L_RooCTauPdf_1D_Expanded" />
 	<class name="HZZ4L_RooCTauPdf_2D" />
 	<class name="HZZ4L_RooSpinZeroPdf" />
+
+	<class name="HZZ4L_RooHighmass_1D" />
+	<class name="HZZ4L_RooHighmass" />
+
 	<class name="HZZ4L_RooSpinZeroPdf_1D" />
+
 	<class name="HZZ4L_RooSpinZeroPdf_2D" />
 	<class name="HZZ4L_RooSpinZeroPdf_phase" />
 	<class name="VBFHZZ4L_RooSpinZeroPdf" />
@@ -185,8 +190,15 @@
 	<class name="TH1Keys" />
 	<class name="Triangle" />
 	<class name="VerticalInterpHistPdf" />
+	<class name="RooNCSplinePdf_1D_fast" />
+	<class name="RooNCSplinePdf_2D_fast" />
+	<class name="RooNCSplinePdf_3D_fast" />
+	<class name="Width_conv" />
+	<class name="Width_integral" />
+	<class name="SplinePdf" />
 	<class name="VerticalInterpPdf" />
 	<class name="GaussExp" />
+	<class name="HZZ4L_onshell_2D" />
 	<class name="RooParametricHist" />
 	<class name="RooMorphingPdf" />
         <function name="function th1fmorph" />

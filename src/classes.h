@@ -1,4 +1,5 @@
 #include "HiggsAnalysis/CombinedLimit/interface/TestProposal.h"
+#include "HiggsAnalysis/CombinedLimit/interface/HZZ2L2QRooPdfs.h"
 #include "HiggsAnalysis/CombinedLimit/interface/DebugProposal.h"
 #include "HiggsAnalysis/CombinedLimit/interface/VerticalInterpPdf.h"
 #include "HiggsAnalysis/CombinedLimit/interface/VerticalInterpHistPdf.h"
@@ -14,7 +15,7 @@
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooCTauPdf_2D.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4LRooPdfs.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HWWLVJRooPdfs.h"
-#include "HiggsAnalysis/CombinedLimit/interface/HZZ2L2QRooPdfs.h"
+
 #include "HiggsAnalysis/CombinedLimit/interface/HGGRooPdfs.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HZGRooPdfs.h"
 #include "HiggsAnalysis/CombinedLimit/interface/SequentialMinimizer.h"
@@ -31,7 +32,11 @@
 #include "HiggsAnalysis/CombinedLimit/interface/AtlasPdfs.h"
 #include "HiggsAnalysis/CombinedLimit/interface/FastTemplateFunc.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf.h"
+
+#include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf_phase.h"
+
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf_1D.h"
+
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf_2D.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf_phase.h"
 #include "HiggsAnalysis/CombinedLimit/interface/VBFHZZ4L_RooSpinZeroPdf.h"
@@ -47,16 +52,22 @@
 #include "HiggsAnalysis/CombinedLimit/interface/RooMorphingPdf.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooParametricHist.h"
 #include "HiggsAnalysis/CombinedLimit/interface/GaussExp.h"
+#include "HiggsAnalysis/CombinedLimit/interface/RooNCSplinePdfCore.h"
+#include "HiggsAnalysis/CombinedLimit/interface/Width_integral.h"
+#include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_onshell_2D.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooDoubleCBFast.h"
 #include "HiggsAnalysis/CombinedLimit/interface/CMSHistFunc.h"
 #include "HiggsAnalysis/CombinedLimit/interface/CMSHistErrorPropagator.h"
 #include "HiggsAnalysis/CombinedLimit/interface/CMSHistFuncWrapper.h"
-
+#include "HiggsAnalysis/CombinedLimit/interface/Width_conv.h"
+//#include "HiggsAnalysis/CombinedLimit/interface/Width_conv_offshell.h"
+//#include "HiggsAnalysis/CombinedLimit/interface/Width_conv_integral.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooNCSplineCore.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooNCSpline_1D_fast.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooNCSpline_2D_fast.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooNCSpline_3D_fast.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooFuncPdf.h"
+#include "HiggsAnalysis/CombinedLimit/interface/SplinePdf.h"
 
 namespace {
     struct dictionary {

@@ -794,6 +794,11 @@ std::auto_ptr<RooStats::HybridCalculator> HybridNew::create(RooWorkspace *w, Roo
   w->defineSet(paramsZSnapName, paramsZero ,true);
   RooMsgService::instance().setGlobalKillBelow(level);
 
+      //setup.modelConfig.Print("v"); 
+      //setup.modelConfig.GetPdf()->Print("V"); 
+      //setup.modelConfig_bonly.Print("v"); 
+      //setup.modelConfig_bonly.GetPdf()->Print("V"); 
+      //utils::printPdf(setup.modelConfig_bonly.GetPdf()); 
   // Create pdfs without nusiances terms, can be used for LEP tests statistics and
   // for generating toys when not generating global observables
   RooAbsPdf *factorizedPdf_s = setup.modelConfig.GetPdf(), *factorizedPdf_b = setup.modelConfig_bonly.GetPdf();
@@ -806,6 +811,11 @@ std::auto_ptr<RooStats::HybridCalculator> HybridNew::create(RooWorkspace *w, Roo
         setup.modelConfig.SetPdf(*factorizedPdf_s);
         setup.modelConfig_bonly.SetPdf(*factorizedPdf_b);
   }
+      //setup.modelConfig.Print("V"); 
+      //setup.modelConfig.GetPdf()->Print("V"); 
+      //setup.modelConfig_bonly.Print("V"); 
+      //setup.modelConfig_bonly.GetPdf()->Print("V"); 
+      //utils::printPdf(setup.modelConfig_bonly.GetPdf()); 
 
   if (testStat_ == "LEP") {
       //SLR is evaluated using the central value of the nuisance parameters, so we have to put them in the parameter sets
@@ -958,7 +968,20 @@ std::auto_ptr<RooStats::HybridCalculator> HybridNew::create(RooWorkspace *w, Roo
         hc->SetToys(nToys_, nToys_);
       }
   }
-
+//  setup.modelConfig_bonly.LoadSnapshot();
+//  RooArgSet* bp = setup.modelConfig_bonly.GetPdf()->getParameters(data);
+//  RooArgSet bpoi(*setup.modelConfig_bonly.GetParametersOfInterest());
+//  setup.modelConfig.LoadSnapshot();
+//  RooArgSet *sp= setup.modelConfig.GetPdf()->getParameters(data);
+//
+//
+//  std::cout<< "bonly paramters"<<std::endl;
+//  bp->Print("V");
+//  std::cout<< "sb paramters"<<std::endl;
+//  sp->Print("V");
+//  std::cout<< "b poi"<<std::endl;
+//  bpoi.Print("V");
+//
 
   return hc;
 }

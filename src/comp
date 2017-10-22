@@ -1,0 +1,119 @@
+=== Using the following for HybridNew_mc_s ===
+Observables:             RooArgSet:: = (mreco,mreco_rse,CMS_channel)
+Parameters of Interest:  RooArgSet:: = (r)
+Nuisance Parameters:     RooArgSet:: = (__HybridNew_fake_nuis__)
+Global Observables:      RooArgSet:: = (BRhiggs_hzz4l_In,CMS_eff_e_In,CMS_eff_m_In,CMS_hzz2e2mu_Zjets_In,CMS_hzz4e_Zjets_In,CMS_hzz4mu_Zjets_In,EWKscale_VV_In,JES_In,PDF_qqbar_In,QCDScale_vbf_In,QCDscale_VV_In,Res2e2mu_In,Res4e_In,Res4mu_In,lumi_13TeV_In,kfactor_ggZZ_In)
+PDF:                     RooSimultaneousOpt::model_s[ indexCat=CMS_channel ch1_ch1_ch1=pdf_binch1_ch1_ch1 ch1_ch1_ch2=pdf_binch1_ch1_ch2 ch2_ch1_ch1=pdf_binch2_ch1_ch1 ch2_ch1_ch2=pdf_binch2_ch1_ch2 ch2_ch1_ch3=pdf_binch2_ch1_ch3 ch3_ch1_ch1=pdf_binch3_ch1_ch1 ch3_ch1_ch2=pdf_binch3_ch1_ch2 ch3_ch1_ch3=pdf_binch3_ch1_ch3 extraConstraints=() channelMasks=() ] = 0.00125175
+Snapshot:                
+  1) 0x83f9d50 RooRealVar::                  r = 5 C  L(0 - 5)  "r"
+  2) 0x83fa6d0 RooRealVar::      BRhiggs_hzz4l = -0.012876 +/- 0.996495  L(-7 - 7)  "BRhiggs_hzz4l"
+  3) 0x83faff0 RooRealVar::          CMS_eff_e = 0.262281 +/- 0.591326  L(-7 - 7)  "CMS_eff_e"
+  4) 0x83fb910 RooRealVar::          CMS_eff_m = 0.497248 +/- 0.812375  L(-7 - 7)  "CMS_eff_m"
+  5) 0x83fc230 RooRealVar:: CMS_hzz2e2mu_Zjets = -0.320768 +/- 0.823445  L(-7 - 7)  "CMS_hzz2e2mu_Zjets"
+  6) 0x83fcbb0 RooRealVar::    CMS_hzz4e_Zjets = 0.499917 +/- 0.835829  L(-7 - 7)  "CMS_hzz4e_Zjets"
+  7) 0x83fd4d0 RooRealVar::   CMS_hzz4mu_Zjets = -0.515711 +/- 0.705972  L(-7 - 7)  "CMS_hzz4mu_Zjets"
+  8) 0x83fde50 RooRealVar::        EWKscale_VV = -0.007022 +/- 0.99653  L(-7 - 7)  "EWKscale_VV"
+  9) 0x83fe770 RooRealVar::                JES = -0.11799 +/- 0.743604  L(-7 - 7)  "JES"
+ 10) 0x83ff090 RooRealVar::          PDF_qqbar = 0.212168 +/- 0.924066  L(-7 - 7)  "PDF_qqbar"
+ 11) 0x83ff9b0 RooRealVar::       QCDScale_vbf = -0.0378266 +/- 0.991965  L(-7 - 7)  "QCDScale_vbf"
+ 12) 0x84002d0 RooRealVar::        QCDscale_VV = 0.218804 +/- 0.91918  L(-7 - 7)  "QCDscale_VV"
+ 13) 0x8400bf0 RooRealVar::           Res2e2mu = -0.142281 +/- 0.773674  L(-7 - 7)  "Res2e2mu"
+ 14) 0x8401500 RooRealVar::              Res4e = -0.0797998 +/- 0.96751  L(-7 - 7)  "Res4e"
+ 15) 0x8401e10 RooRealVar::             Res4mu = -0.606119 +/- 0.823896  L(-7 - 7)  "Res4mu"
+ 16) 0x8402720 RooRealVar::       kfactor_ggZZ = 0.703645 +/- 0.865482  L(-4 - 4)  "kfactor_ggZZ"
+ 17) 0x8403000 RooRealVar::         lumi_13TeV = 0.356167 +/- 0.921495  L(-7 - 7)  "lumi_13TeV"
+
+--- RooAbsArg ---
+  Value State: DIRTY
+  Shape State: DIRTY
+  Attributes: 
+  Address: 0x7703b70
+  Clients: 
+  Servers: 
+    (0x76f8680,V-) RooCategory::CMS_channel "CMS_channel"
+    (0x5f30730,V-) RooProdPdf::pdf_binch1_ch1_ch1 ""
+    (0x765c120,V-) RooProdPdf::pdf_binch1_ch1_ch2 ""
+    (0x7697ed0,V-) RooProdPdf::pdf_binch2_ch1_ch1 ""
+    (0x76ba4f0,V-) RooProdPdf::pdf_binch2_ch1_ch2 ""
+    (0x76bdca0,V-) RooProdPdf::pdf_binch2_ch1_ch3 ""
+    (0x76d74c0,V-) RooProdPdf::pdf_binch3_ch1_ch1 ""
+    (0x77055b0,V-) RooProdPdf::pdf_binch3_ch1_ch2 ""
+    (0x78104b0,V-) RooProdPdf::pdf_binch3_ch1_ch3 ""
+  Proxies: 
+    !plotCoefNormSet -> 
+    indexCat -> CMS_channel
+    ch1_ch1_ch1 -> pdf_binch1_ch1_ch1
+    ch1_ch1_ch2 -> pdf_binch1_ch1_ch2
+    ch2_ch1_ch1 -> pdf_binch2_ch1_ch1
+    ch2_ch1_ch2 -> pdf_binch2_ch1_ch2
+    ch2_ch1_ch3 -> pdf_binch2_ch1_ch3
+    ch3_ch1_ch1 -> pdf_binch3_ch1_ch1
+    ch3_ch1_ch2 -> pdf_binch3_ch1_ch2
+    ch3_ch1_ch3 -> pdf_binch3_ch1_ch3
+    extraConstraints -> 
+    channelMasks -> 
+--- RooAbsReal ---
+
+  Plot label is "model_s"
+--- RooAbsPdf ---
+Cached value = 0
+
+=== Using the following for HybridNew_mc_b ===
+Observables:             RooArgSet:: = (mreco,mreco_rse,CMS_channel)
+Parameters of Interest:  RooArgSet:: = (r)
+Nuisance Parameters:     RooArgSet:: = (__HybridNew_fake_nuis__)
+Global Observables:      RooArgSet:: = (BRhiggs_hzz4l_In,CMS_eff_e_In,CMS_eff_m_In,CMS_hzz2e2mu_Zjets_In,CMS_hzz4e_Zjets_In,CMS_hzz4mu_Zjets_In,EWKscale_VV_In,JES_In,PDF_qqbar_In,QCDScale_vbf_In,QCDscale_VV_In,Res2e2mu_In,Res4e_In,Res4mu_In,lumi_13TeV_In,kfactor_ggZZ_In)
+PDF:                     RooSimultaneousOpt::model_s[ indexCat=CMS_channel ch1_ch1_ch1=pdf_binch1_ch1_ch1 ch1_ch1_ch2=pdf_binch1_ch1_ch2 ch2_ch1_ch1=pdf_binch2_ch1_ch1 ch2_ch1_ch2=pdf_binch2_ch1_ch2 ch2_ch1_ch3=pdf_binch2_ch1_ch3 ch3_ch1_ch1=pdf_binch3_ch1_ch1 ch3_ch1_ch2=pdf_binch3_ch1_ch2 ch3_ch1_ch3=pdf_binch3_ch1_ch3 extraConstraints=() channelMasks=() ] = 0.00125175
+Snapshot:                
+  1) 0x83f9d50 RooRealVar::                  r = 0 C  L(0 - 5)  "r"
+  2) 0x83fa6d0 RooRealVar::      BRhiggs_hzz4l = 0 +/- 0.996495  L(-7 - 7)  "BRhiggs_hzz4l"
+  3) 0x83faff0 RooRealVar::          CMS_eff_e = 0.262551 +/- 0.591326  L(-7 - 7)  "CMS_eff_e"
+  4) 0x83fb910 RooRealVar::          CMS_eff_m = 0.502359 +/- 0.812375  L(-7 - 7)  "CMS_eff_m"
+  5) 0x83fc230 RooRealVar:: CMS_hzz2e2mu_Zjets = -0.320367 +/- 0.823445  L(-7 - 7)  "CMS_hzz2e2mu_Zjets"
+  6) 0x83fcbb0 RooRealVar::    CMS_hzz4e_Zjets = 0.498997 +/- 0.835829  L(-7 - 7)  "CMS_hzz4e_Zjets"
+  7) 0x83fd4d0 RooRealVar::   CMS_hzz4mu_Zjets = -0.516911 +/- 0.705972  L(-7 - 7)  "CMS_hzz4mu_Zjets"
+  8) 0x83fde50 RooRealVar::        EWKscale_VV = -0.00680389 +/- 0.99653  L(-7 - 7)  "EWKscale_VV"
+  9) 0x83fe770 RooRealVar::                JES = -0.118589 +/- 0.743604  L(-7 - 7)  "JES"
+ 10) 0x83ff090 RooRealVar::          PDF_qqbar = 0.209536 +/- 0.924066  L(-7 - 7)  "PDF_qqbar"
+ 11) 0x83ff9b0 RooRealVar::       QCDScale_vbf = -0.0399123 +/- 0.991965  L(-7 - 7)  "QCDScale_vbf"
+ 12) 0x84002d0 RooRealVar::        QCDscale_VV = 0.216021 +/- 0.91918  L(-7 - 7)  "QCDscale_VV"
+ 13) 0x8400bf0 RooRealVar::           Res2e2mu = -0.142945 +/- 0.773674  L(-7 - 7)  "Res2e2mu"
+ 14) 0x8401500 RooRealVar::              Res4e = -0.0800246 +/- 0.96751  L(-7 - 7)  "Res4e"
+ 15) 0x8401e10 RooRealVar::             Res4mu = -0.605801 +/- 0.823896  L(-7 - 7)  "Res4mu"
+ 16) 0x8402720 RooRealVar::       kfactor_ggZZ = 0.701711 +/- 0.865482  L(-4 - 4)  "kfactor_ggZZ"
+ 17) 0x8403000 RooRealVar::         lumi_13TeV = 0.363494 +/- 0.921495  L(-7 - 7)  "lumi_13TeV"
+
+--- RooAbsArg ---
+  Value State: DIRTY
+  Shape State: DIRTY
+  Attributes: 
+  Address: 0x7703b70
+  Clients: 
+  Servers: 
+    (0x76f8680,V-) RooCategory::CMS_channel "CMS_channel"
+    (0x5f30730,V-) RooProdPdf::pdf_binch1_ch1_ch1 ""
+    (0x765c120,V-) RooProdPdf::pdf_binch1_ch1_ch2 ""
+    (0x7697ed0,V-) RooProdPdf::pdf_binch2_ch1_ch1 ""
+    (0x76ba4f0,V-) RooProdPdf::pdf_binch2_ch1_ch2 ""
+    (0x76bdca0,V-) RooProdPdf::pdf_binch2_ch1_ch3 ""
+    (0x76d74c0,V-) RooProdPdf::pdf_binch3_ch1_ch1 ""
+    (0x77055b0,V-) RooProdPdf::pdf_binch3_ch1_ch2 ""
+    (0x78104b0,V-) RooProdPdf::pdf_binch3_ch1_ch3 ""
+  Proxies: 
+    !plotCoefNormSet -> 
+    indexCat -> CMS_channel
+    ch1_ch1_ch1 -> pdf_binch1_ch1_ch1
+    ch1_ch1_ch2 -> pdf_binch1_ch1_ch2
+    ch2_ch1_ch1 -> pdf_binch2_ch1_ch1
+    ch2_ch1_ch2 -> pdf_binch2_ch1_ch2
+    ch2_ch1_ch3 -> pdf_binch2_ch1_ch3
+    ch3_ch1_ch1 -> pdf_binch3_ch1_ch1
+    ch3_ch1_ch2 -> pdf_binch3_ch1_ch2
+    ch3_ch1_ch3 -> pdf_binch3_ch1_ch3
+    extraConstraints -> 
+    channelMasks -> 
+--- RooAbsReal ---
+
+  Plot label is "model_s"
+--- RooAbsPdf ---
+Cached value = 0

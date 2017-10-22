@@ -25,6 +25,7 @@ ToyMCSamplerOpt::ToyMCSamplerOpt(RooStats::TestStatistic& ts, Int_t ntoys, RooAb
     weightVar_(0)
 {
     if (!generateNuisances) fPriorNuisance = 0; // set things straight from the beginning
+    std::cout<< "Calling ToyMCSamplerOpt"<<std::endl;
 }
 
 
@@ -134,7 +135,9 @@ toymcoptutils::SinglePdfGenInfo::generateAsimov(RooRealVar *&weightVar, double w
     if (mode_ == Counting) return generateCountingAsimov();
     int nPA = runtimedef::get("TMCSO_PseudoAsimov");  // Will trigger the use of weighted data 
     int boostAPA = runtimedef::get("TMCSO_AdaptivePseudoAsimov");
-    if (boostAPA>0) {  // trigger adaptive PA (setting boostAPA=1 will just use internal logic)
+
+    cout<< "TMCSO_PseudoAsimov " << nPA<<"\t"<< "TMCSO_AdaptivePseudoAsimov "<< boostAPA<<endl;
+    if (observables_.getSize() > 1 && boostAPA) {
         int nbins = 1;
         RooLinkedListIter iter = observables_.iterator(); 
         for (RooAbsArg *a = (RooAbsArg *) iter.Next(); a != 0; a = (RooAbsArg *) iter.Next()) {
@@ -494,10 +497,10 @@ ToyMCSamplerOpt::SetPdf(RooAbsPdf& pdf)
 }
 
 RooDataSet* ToyMCSamplerOpt::GetSamplingDistributionsSingleWorker(RooArgSet& paramPointIn) {
-   //std::cout << "ToyMCSamplerOpt::GetSamplingDistributionsSingleWorker called" << std::endl;
-   //utils::printPdf(fPdf);
-   //std::cout << "paramPointIn: " << std::endl;
-   //paramPointIn.Print("V");
+   std::cout << "ToyMCSamplerOpt::GetSamplingDistributionsSingleWorker called" << std::endl;
+   utils::printPdf(fPdf);
+   std::cout << "paramPointIn: " << std::endl;
+   paramPointIn.Print("V");
    //// <<<<<<=======================>>>>>>
    //return ToyMCSampler::GetSamplingDistributionsSingleWorker(paramPointIn);
    /// Taken from http://root.cern.ch/viewcvs/tags/v5-34-03/roofit/roostats/src/ToyMCSampler.cxx?revision=46856&view=markup
