@@ -1,0 +1,15 @@
+#!/bin/bash
+basedir=$1
+quad=$2
+tag=$3
+workdir=$4
+echo $PWD
+cd $CMSSW_BASE/src
+eval `scramv1 runtime -sh`
+cd $workdir
+cp $workdir/make_rpdfWS_withCat.cc ./
+cp $workdir/loadLib.C ./
+cp $workdir/make_rpdfWS.sh ./
+
+bash make_rpdfWS.sh $basedir $quad $tag
+

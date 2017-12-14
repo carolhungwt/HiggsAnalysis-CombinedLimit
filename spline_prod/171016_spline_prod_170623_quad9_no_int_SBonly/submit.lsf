@@ -1,0 +1,16 @@
+#!/bin/bash
+workdir=$1
+ch=$2
+cat=$3
+quad=$4
+cate_vbf=$5
+prodcate=$6
+echo $PWD
+cd $CMSSW_BASE/src
+eval `scramv1 runtime -sh`
+cd $workdir
+cp $workdir/make_rpdfWS_withCat.cc ./
+cp $workdir/loadLib.C ./
+
+bash make_Sp_WS_withCat.sh $workdir $ch $cat $quad $cate_vbf $prodcate
+
