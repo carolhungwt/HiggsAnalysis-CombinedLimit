@@ -1,7 +1,8 @@
 #ifndef HiggsAnalysis_CombinedLimit_FastTplFunc
 #define HiggsAnalysis_CombinedLimit_FastTplFunc
-
+#include "RooRealVar.h"
 #include "RooAbsReal.h"
+#include "RooListProxy.h"
 #include "RooArgSet.h"
 #include "FastTemplate.h"
 #include <iostream>
