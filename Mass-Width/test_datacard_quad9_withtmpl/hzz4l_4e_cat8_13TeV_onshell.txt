@@ -1,0 +1,44 @@
+imax	3	number	of	bins															
+jmax	11	number	of	processes	minus	1													
+kmax	18	number	of	nuisance	parameters														
+----------------------------------------------------------------------------------------------------------------------------------																			
+shapes	ggH_untagged	ch1	/afs/cern.ch/user/w/wahung/work/public/CombineLimitDbkgkin/CMSSW_7_4_7/src/HiggsAnalysis/CombinedLimit/spline_prod/171016_spline_prod_170623_quad9_no_int_SBonly/spline_WS_withCat_quad9/4e_spline_WS_cat8.root	w:$PROCESS	w:$PROCESS_$SYSTEMATIC														
+shapes	qqH_untagged	ch1	/afs/cern.ch/user/w/wahung/work/public/CombineLimitDbkgkin/CMSSW_7_4_7/src/HiggsAnalysis/CombinedLimit/spline_prod/171016_spline_prod_170623_quad9_no_int_SBonly/spline_WS_withCat_quad9/4e_spline_WS_cat8.root	w:$PROCESS	w:$PROCESS_$SYSTEMATIC														
+shapes	VH_untagged	ch1	/afs/cern.ch/user/w/wahung/work/public/CombineLimitDbkgkin/CMSSW_7_4_7/src/HiggsAnalysis/CombinedLimit/spline_prod/171016_spline_prod_170623_quad9_no_int_SBonly/spline_WS_withCat_quad9/4e_spline_WS_cat8.root	w:$PROCESS	w:$PROCESS_$SYSTEMATIC														
+shapes	*	ch1 	/afs/cern.ch/user/w/wahung/work/CMSSW_8_0_26_patch1/src/HiggsAnalysis/CombinedLimit/Mass-Width/testBKg/171121_sig_bkg_tmpl_withDmass_quad9/workspace_2d_bkg_onshell_withCat/hzz4l_4e0S_cat8_13TeV.input_func.root	w:$PROCESS	w:$PROCESS_$SYSTEMATIC														
+shapes	ggH_vbf2j	ch2	/afs/cern.ch/user/w/wahung/work/public/CombineLimitDbkgkin/CMSSW_7_4_7/src/HiggsAnalysis/CombinedLimit/spline_prod/171016_spline_prod_170623_quad9_no_int_SBonly/spline_WS_withCat_quad9/4e_spline_WS_cat8.root	w:$PROCESS	w:$PROCESS_$SYSTEMATIC														
+shapes	qqH_vbf2j	ch2	/afs/cern.ch/user/w/wahung/work/public/CombineLimitDbkgkin/CMSSW_7_4_7/src/HiggsAnalysis/CombinedLimit/spline_prod/171016_spline_prod_170623_quad9_no_int_SBonly/spline_WS_withCat_quad9/4e_spline_WS_cat8.root	w:$PROCESS	w:$PROCESS_$SYSTEMATIC														
+shapes	VH_vbf2j	ch2	/afs/cern.ch/user/w/wahung/work/public/CombineLimitDbkgkin/CMSSW_7_4_7/src/HiggsAnalysis/CombinedLimit/spline_prod/171016_spline_prod_170623_quad9_no_int_SBonly/spline_WS_withCat_quad9/4e_spline_WS_cat8.root	w:$PROCESS	w:$PROCESS_$SYSTEMATIC														
+shapes	*	ch2	/afs/cern.ch/user/w/wahung/work/CMSSW_8_0_26_patch1/src/HiggsAnalysis/CombinedLimit/Mass-Width/testBKg/171121_sig_bkg_tmpl_withDmass_quad9/workspace_2d_bkg_onshell_withCat/hzz4l_4e0S_cat8_13TeV.input_func.root	w:$PROCESS	w:$PROCESS_$SYSTEMATIC														
+shapes	ggH_vhhad	ch3	/afs/cern.ch/user/w/wahung/work/public/CombineLimitDbkgkin/CMSSW_7_4_7/src/HiggsAnalysis/CombinedLimit/spline_prod/171016_spline_prod_170623_quad9_no_int_SBonly/spline_WS_withCat_quad9/4e_spline_WS_cat8.root	w:$PROCESS	w:$PROCESS_$SYSTEMATIC														
+shapes	qqH_vhhad	ch3	/afs/cern.ch/user/w/wahung/work/public/CombineLimitDbkgkin/CMSSW_7_4_7/src/HiggsAnalysis/CombinedLimit/spline_prod/171016_spline_prod_170623_quad9_no_int_SBonly/spline_WS_withCat_quad9/4e_spline_WS_cat8.root	w:$PROCESS	w:$PROCESS_$SYSTEMATIC														
+shapes	VH_vhhad	ch3	/afs/cern.ch/user/w/wahung/work/public/CombineLimitDbkgkin/CMSSW_7_4_7/src/HiggsAnalysis/CombinedLimit/spline_prod/171016_spline_prod_170623_quad9_no_int_SBonly/spline_WS_withCat_quad9/4e_spline_WS_cat8.root	w:$PROCESS	w:$PROCESS_$SYSTEMATIC														
+shapes	*	ch3	/afs/cern.ch/user/w/wahung/work/CMSSW_8_0_26_patch1/src/HiggsAnalysis/CombinedLimit/Mass-Width/testBKg/171121_sig_bkg_tmpl_withDmass_quad9/workspace_2d_bkg_onshell_withCat/hzz4l_4e0S_cat8_13TeV.input_func.root	w:$PROCESS	w:$PROCESS_$SYSTEMATIC														
+----------------------------------------------------------------------------------------------------------------------------------																			
+bin	ch1	ch2	ch3																
+observation	-1	-1	-1																
+----------------------------------------------------------------------------------------------------------------------------------																			
+bin		ch1	ch1	ch1 	ch1	ch1	ch1	ch2	ch2	ch2	ch2	ch2	ch2	ch3	ch3	ch3	ch3	ch3	ch3
+process		ggH_untagged	qqH_untagged	VH_untagged	bkg_qqzz	bkg_zjet	bkg_ggzz	ggH_vbf2j	qqH_vbf2j	VH_vbf2j	bkg_qqzz	bkg_zjet	bkg_ggzz	ggH_vhhad	qqH_vhhad	VH_vhhad	bkg_qqzz	bkg_zjet	bkg_ggzz
+process		-1	0	-2	1	2	3	-1	0	-2	1	2	3	-1	0	-2	1	2	3
+rate 	 1.221768386	1.25275922	1 0.790544214735 0.189937037037 0.131152222222 1.221768386	1.25275922	1 0.0202227508435 0.189937037037   0.0 1.221768386	1.25275922	1 0.1321474096 0.189937037037   0.0 
+																			
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------																			
+CMS_eff_e	lnN	0.914/1.082	-	0.914/1.082	0.914/1.082	-	0.960/1.039	0.914/1.082	-	0.914/1.082	0.914/1.082	0.960/1.039	0.914/1.082	0.914/1.082	-	0.914/1.082	0.914/1.082	-	0.960/1.039
+CMS_eff_m	lnN	-	0.953/1.046	-	-	-	1.025	-	0.953/1.046	-	-	-	1.025	-	0.953/1.046	-	-	-	1.025
+QCDscale_VV	lnN	-	-	-	1.0319/0.9582	-	-	-	-	-	1.0319/0.9582	-	-	-	-	-	1.0319/0.9582	-	-
+QCDscale_ggH	lnN	1.0653/0.9383	-	-	-	-	-	1.0653/0.9383	-	-	-	-	-	1.0653/0.9383	-	-	-	-	-
+QCDscale_qqH	lnN	-	1.0313/0.9716	-	-	-	-	-	1.0313/0.9716	-	-	-	-	-	1.0313/0.9716	-	-	-	-
+PDF_ggH	lnN	1.0359/0.9653	-	-	-	-	1.032/0.968	1.0359/0.9653	-	-	-	-	1.032/0.968	1.0359/0.9653	-	-	-	-	1.032/0.968
+PDF_qqH	lnN	-	1.0477/0.9543	-	-	-	-	-	1.0477/0.9543	-	-	-	-	-	1.0477/0.9543	-	-	-	-
+PDF_qqbar	lnN	-	-	1.021/0.979	1.0308/0.9662	-	-	-	-	1.021/0.979	1.0308/0.9662	-	-	-	-	1.021/0.979	1.0308/0.9662	-	-
+lumi_13TeV	lnN	1.026	1.026	1.026	1.026	-	1.026	1.026	1.026	1.026	1.026	-	1.026	1.026	1.026	1.026	1.026	-	1.026
+BRhiggs_hzz4l	lnN	1.02	1.02	1.02	-	-	-	1.02	1.02	1.02	-	-	-	1.02	1.02	1.02	-	-	-
+CMS_hzz4e_Zjets	lnN	-	-	-	-	0.56/1.47	-	-	-	-	-	0.56/1.47	-	-	-	-	-	0.56/1.47	-
+CMS_hzz2e2mu_Zjets	lnN	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-
+CMS_hzz4mu_Zjets	lnN	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-
+JES	lnN	0.9849/1.0141	0.9775/1.0334	0.9775/1.0334	0.9869/1.0078	-	0.9849/1.0141	0.9849/1.0141	0.9775/1.0334	0.9775/1.0334	0.9869/1.0078	-	0.9849/1.0141	0.9849/1.0141	0.9775/1.0334	0.9775/1.0334	0.9869/1.0078	-	0.9849/1.0141
+QCDScale_vbf	lnN	0.996	0.999	0.999	0.994	0.996	0.996	0.996	0.999	0.999	0.994	0.996	0.996	0.996	0.999	0.999	0.994	0.996	0.996
+EWKscale_VV	shape1	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-
+QCDscale_VH	lnN	-	-	1.005/0.993	-	-	-	-	-	1.005/0.993	-	-	-	-	-	1.005/0.993	-	-	-
+QCDscale_ggVV	lnN	-	-	-	-	-	1.039/0.961	-	-	-	-	-	1.039/0.961	-	-	-	-	-	1.039/0.961
