@@ -1,0 +1,309 @@
+{
+        "inputDirectory":"/eos/user/w/wahung/Mass_Width_Measurement/Data_Sample/170623/",
+        "outputFile":"spline_tmpl_finer.root",
+        // template definitions
+        "templates":[
+
+                
+                {       
+                        "name":"ggzz_bkg_4e",
+                        "files":[
+                                "ggTo4e_Contin_MCFM701/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 ",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                },
+                {       
+                        "name":"ggzz_sig_4e",
+                        "files":[
+                                "ggTo4e_0MH125_MCFM701/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 ",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                },
+                {       
+                        "name":"ggzz_bkg_2e2mu",
+                        "files":[
+                                "ggTo2e2mu_Contin_MCFM701/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 ",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                },
+                {       
+                        "name":"ggzz_sig_2e2mu",
+                        "files":[
+                                "ggTo2e2mu_0MH125_MCFM701/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 ",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                },
+                {       
+                        "name":"ggzz_bkg_4mu",
+                        "files":[
+                                "ggTo4mu_Contin_MCFM701/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 ",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                },
+                {       
+                        "name":"ggzz_sig_4mu",
+                        "files":[
+                                "ggTo4mu_0MH125_MCFM701/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 ",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                },
+                {       
+                        "name":"qqzz_bkg_4e",
+                        "files":[
+                                "ZZTo4lext/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 &&abs(Z1Flav*Z2Flav)==169*169",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                },
+                {       
+                        "name":"qqzz_bkg_2e2mu",
+                        "files":[
+                                "ZZTo4lext/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 &&abs(Z1Flav*Z2Flav)==169*121",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                },
+                {       
+                        "name":"qqzz_bkg_4mu",
+                        "files":[
+                                "ZZTo4lext/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 &&abs(Z1Flav*Z2Flav)==121*121",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                },
+                {       
+                        "name":"vbf_bkg_4e",
+                        "files":[
+                                "VBFTo4eJJ_Contin_phantom128/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 ",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                },
+                {       
+                        "name":"vbf_sig_4e",
+                        "files":[
+                                "VBFTo4eJJ_0PMH125_phantom128/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 ",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                },
+                {       
+                        "name":"vbf_bkg_2e2mu",
+                        "files":[
+                                "VBFTo2e2muJJ_Contin_phantom128/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 ",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                },
+                {       
+                        "name":"vbf_sig_2e2mu",
+                        "files":[
+                                "VBFTo2e2muJJ_0PMH125_phantom128/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 ",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                },
+                {       
+                        "name":"vbf_bkg_4mu",
+                        "files":[
+                                "VBFTo4muJJ_Contin_phantom128/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 ",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                },
+                {       
+                        "name":"vbf_sig_4mu",
+                        "files":[
+                                "VBFTo4muJJ_0PMH125_phantom128/ZZ4lAnalysis.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 ",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+//                                {"type":"reweight", "axes":[1]}
+                        ]
+                }
+	]
+}
