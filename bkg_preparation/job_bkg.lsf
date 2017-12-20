@@ -1,0 +1,5 @@
+workdir=$PWD
+cd $CMSSW_BASE/src
+eval `scramv1 runtime -sh`
+cd $workdir
+root -q -b "bkgWorkspace.c(\"$1\",$2,$3)"

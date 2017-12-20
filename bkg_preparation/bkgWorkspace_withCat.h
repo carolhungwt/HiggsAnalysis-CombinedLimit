@@ -1,0 +1,51 @@
+#include "TDirectory.h"
+#include "TSystem.h"
+#include "TROOT.h"
+#include "TPad.h"
+#include "TFile.h"
+#include "TH1F.h"
+#include "TTree.h"
+#include "THStack.h"
+#include "TH2.h"
+#include "TSpline.h"
+#include "TF1.h"
+#include "TLine.h"
+#include "TCut.h"
+
+#include "TStyle.h"
+#include "TCanvas.h"
+#include "TLegend.h"
+#include "RooRealVar.h"
+#include "RooDataSet.h"
+#include "RooDataHist.h"
+#include "RooGaussian.h"
+#include "RooCBShape.h"
+#include "RooSimultaneous.h"
+#include "RooCategory.h"
+#include "RooWorkspace.h"
+#include "RooKeysPdf.h"
+#include "RooGenericPdf.h"
+#include "RooConstVar.h"
+#include "TChain.h"
+#include "RooHist.h"
+#include "TCanvas.h"
+#include "RooProdPdf.h"
+#include "TLegend.h"
+#include "RooPlot.h"
+#include "TAxis.h"
+#include "TPaveText.h"
+#include "RooAddPdf.h"
+#include "RooBreitWigner.h"
+#include "RooFitResult.h"
+#include "RooFFTConvPdf.h"
+#include "RooAddition.h"
+#include "RooMinuit.h"
+#include "Math/MinimizerOptions.h"
+
+
+using namespace RooFit;
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <iomanip>
+#include <sstream>
