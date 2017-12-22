@@ -4,12 +4,12 @@
 #include "TTree.h"
 #include "TSpline.h"
 #include "TChain.h"
-#include "ZZAnalysis/AnalysisStep/interface/Category.h"
-#include "ZZAnalysis/AnalysisStep/src/Category.cc"
-#include "ZZAnalysis/AnalysisStep/interface/Discriminants.h"
-#include "ZZAnalysis/AnalysisStep/src/Discriminants.cc"
-#include "ZZAnalysis/AnalysisStep/src/cConstants.cc"
- #include "ZZAnalysis/AnalysisStep/interface/cConstants.h"
+#include "HiggsAnalysis/CombinedLimit/interface/Category.h"
+#include "HiggsAnalysis/CombinedLimit/src/Category.cc"
+#include "HiggsAnalysis/CombinedLimit/interface/Discriminants.h"
+#include "HiggsAnalysis/CombinedLimit/src/Discriminants.cc"
+#include "HiggsAnalysis/CombinedLimit/src/cConstants.cc"
+ #include "HiggsAnalysis/CombinedLimit/interface/cConstants.h"
 #include <vector>
 using namespace std;
 void qqzz_withDmass(){

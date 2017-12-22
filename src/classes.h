@@ -32,7 +32,9 @@
 #include "HiggsAnalysis/CombinedLimit/interface/AtlasPdfs.h"
 #include "HiggsAnalysis/CombinedLimit/interface/FastTemplateFunc.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf.h"
-
+#include "HiggsAnalysis/CombinedLimit/interface/Discriminants.h"
+#include "HiggsAnalysis/CombinedLimit/interface/cConstants.h"
+#include "HiggsAnalysis/CombinedLimit/interface/Category.h"
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf_phase.h"
 
 #include "HiggsAnalysis/CombinedLimit/interface/HZZ4L_RooSpinZeroPdf_1D.h"
