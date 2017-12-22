@@ -194,6 +194,8 @@
 	<class name="RooNCSplinePdf_2D_fast" />
 	<class name="RooNCSplinePdf_3D_fast" />
 	<class name="Width_conv" />
+        <class name="Width_conv_offshell" />
+        <class name="Width_conv_integral" />
 	<class name="Width_integral" />
 	<class name="SplinePdf" />
 	<class name="VerticalInterpPdf" />
