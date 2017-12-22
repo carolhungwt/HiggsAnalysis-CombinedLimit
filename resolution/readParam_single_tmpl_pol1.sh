@@ -14,8 +14,8 @@ MassStr+="$mass,"
 done
 MassStr=<MassStr>
 echo "$MassStr"
-datadir=<datadir>
-#datadir=/afs/cern.ch/user/w/wahung/work/public/CombineLimitDbkgkin/resolution_pkg/resolution_Quad9
+paramdir=<paramdir>
+#paramdir=/afs/cern.ch/user/w/wahung/work/public/CombineLimitDbkgkin/resolution_pkg/resolution_Quad9
 for var in {a1,a2,mean,n1,n2,sigma}
 
 #for var in n1
@@ -26,9 +26,9 @@ ErrStr[$paramIndex]=""
 
 for mass in "${masslist[@]}"
 do
-ParamStr[$paramIndex]+="`awk -v ORS="," '/'$var'_CB/{print $3}' ${datadir}/singleMassFit_Quad9/SingleMassFit_ResoParam_MH${mass}_${ch}_Category_${cat}.txt`"
+ParamStr[$paramIndex]+="`awk -v ORS="," '/'$var'_CB/{print $3}' ${paramdir}/singleMassFit_Quad9/SingleMassFit_ResoParam_MH${mass}_${ch}_Category_${cat}.txt`"
 if [ $mass -eq 125 ]; then ErrStr[$paramIndex]+=0,;else
-ErrStr[$paramIndex]+="`awk -v ORS="," '/'$var'_CB/{print $5}' ${datadir}/singleMassFit_Quad9/SingleMassFit_ResoParam_MH${mass}_${ch}_Category_${cat}.txt`"; fi
+ErrStr[$paramIndex]+="`awk -v ORS="," '/'$var'_CB/{print $5}' ${paramdir}/singleMassFit_Quad9/SingleMassFit_ResoParam_MH${mass}_${ch}_Category_${cat}.txt`"; fi
 done
 
 echo "${var}"

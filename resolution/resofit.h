@@ -1,10 +1,12 @@
 #include "TDirectory.h"
 #include "TPad.h"
+#include "TChain.h"
 #include "TFile.h"
 #include "TH1F.h"
 #include "TTree.h"
 #include "THStack.h"
 #include "TH2.h"
+#include "TSpline.h"
 #include "TF1.h"
 #include "TLine.h"
 #include "TCut.h"
@@ -13,15 +15,16 @@
 #include "TCanvas.h"
 #include "TLegend.h"
 #include "TGraphErrors.h"
-#include "HZZ2L2QRooPdfs.h"
-#include "HZZ2L2QRooPdfs.cc+"
-//#include "HiggsAnalysis/CombinedLimit/interface/HZZ2L2QRooPdfs.h"
+//#include "HZZ2L2QRooPdfs.h"
+//#include "HZZ2L2QRooPdfs.cc"
+#include "HiggsAnalysis/CombinedLimit/interface/HZZ2L2QRooPdfs.h"
 //#include "ZZAnalysis/AnalysisStep/interface/Category.h"
 //#include "Math/GenVector/LorentzVector.h"
 //#include "Math/GenVector/PtEtaPhiM4D.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <cmath>
+#include <string>
 
 //#include "Math/GenVector/LorentzVector.h"
 //#include "Math/GenVector/PtEtaPhiM4D.h"
@@ -32,10 +35,11 @@
 #include "RooGaussian.h"
 #include "RooCBShape.h"
 #include "RooSimultaneous.h"
-//#include "RooCategory.h"
+#include "RooCategory.h"
 #include "RooWorkspace.h"
 #include "RooHist.h"
 #include "TCanvas.h"
+
 #include "TLegend.h"
 #include "RooPlot.h"
 #include "TAxis.h"
@@ -47,9 +51,10 @@
 #include "RooAddition.h"
 #include "RooMinuit.h"
 #include "Math/MinimizerOptions.h"
-#include <iomanip>
+
 #include "RooAbsCollection.h"
-#include "RooWorkspace.h"
+
+
 using namespace RooFit;
 #include <string>
 #include <fstream>
@@ -69,6 +74,11 @@ using namespace RooFit;
   double xMaxF=1500;
   double xMin[100];
   double xMax[100];
+  int total_ent=0;
+  int fe_ent=0;
+  int fmu_ent=0;
+  int tetmu_ent=0;
+
 
   RooRealVar x("reso","m_{reco}-m_{true}",0.,xMinF,xMaxF,"GeV");
   RooRealVar w("myW","myW",1.0,-2000.,1500.);
@@ -79,6 +89,7 @@ using namespace RooFit;
   char inputfile[1000];
 
   RooDoubleCB* DCBall[100];
+  RooConstVar* xmgen[100];
   RooRealVar* mean_ind[100];
   RooRealVar* sigma_ind[100];
   RooRealVar* a1_ind[100];
@@ -87,15 +98,16 @@ using namespace RooFit;
   RooRealVar* n2_ind[100];
   RooFitResult* fitres[100];
 
-//  TString  inputDir = "/afs/cern.ch/work/c/cayou/public/80Xsamples/4lsamples_0726/";
-//  TString inputDir = "/afs/cern.ch/user/w/wahung/work/public/Data_Sample/170222/";
-//  TString inputDir = "/afs/cern.ch/user/w/wahung/work/public/CMSSW_7_6_3/src/resolution_Quad2/Quad3_tree_115-3000_noeventweight";
+//  string inputDir =;
   TString inputDir = "/afs/cern.ch/user/w/wahung/work/public/CombineLimitDbkgkin/resolution_pkg/resolution_Quad9/Quad9_tree";
-// int massBin[]={120,124,125,126,130,140};
-// int inputfiles[]={120,124,125,126,130,140};
- int massBin[]={115,120,124,125,126,130,135,140};
- int inputfiles[]={115,120,124,125,126,130,135,140};
 
+  TString TreeinputDir="/eos/user/w/wahung/Mass_Width_Measurement/Data_Sample/";
+
+  const int maxCat = 9;
+//  int inputfiles[]={125};
+//  int massBin[]={125};
+  int massBin[]={115,120,124,125,126,130,135,140};//,145,150,155,160,165,170,175,180,190,200};
+  int inputfiles[]={115,120,124,125,126,130,135,140};//,145,150,155,160,165,170,175,180,190,200};
   int maxMassBin=sizeof(massBin)/sizeof(*massBin);;
   int Nfiles=sizeof(inputfiles)/sizeof(*inputfiles);
 
