@@ -1,5 +1,6 @@
 {
-        "inputDirectory":"/eos/user/w/wahung/Mass_Width_Measurement/Data_Sample/170623/",
+ //       "inputDirectory":"/eos/user/w/wahung/Mass_Width_Measurement/Data_Sample/170623/",
+	"inputDirectory":"/afs/cern.ch/user/w/wahung/work/public/Data_Sample/170623/",
         "outputFile":"spline_tmpl_finer.root",
         // template definitions
         "templates":[

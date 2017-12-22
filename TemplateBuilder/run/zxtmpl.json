@@ -1,0 +1,31 @@
+{
+//        "inputDirectory":"/afs/cern.ch/user/w/wahung/work/public/CombineLimitDbkgkin/CMSSW_7_4_7/src/HiggsAnalysis/CombinedLimit/TemplateBuilder/run",
+	"inputDirectory":"/afs/cern.ch/user/w/wahung/work/public/Data_Sample/170623/",
+        "outputFile":"ZX_tmpl_finer.root",
+        // template definitions
+        "templates":[
+
+                
+                {       
+                        "name":"zx_tmpl",
+                        "files":[
+                                "ZX.root"
+                                ],
+                        "tree":"candTree",
+                        "variables":["ZZMass","dbkg_kin"],
+//                        "weight":"<weight>",
+                        "selection":"ZZMass>104.875 && ZZMass<141.125 ",
+			"conserveSumOfWeights":true,
+//                      "assertion":"D_g1_vs_g4_phi0_cal >= 0. && D_g1_vs_g4_phi0_cal <= 1.",
+                        "binning":{
+                                "type":"fixed",
+                                "bins":[70,105.,140.,10,0.,1.0]
+                        },
+                        "postprocessing":[
+                                {"type":"smooth", "kernel":"adaptive"}
+                        //        {"type":"reweight", "axes":[1]}
+                        ]
+                }
+	]
+}
+
