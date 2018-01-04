@@ -17,10 +17,9 @@ rm plotVar_fitInd*cat*.C
 root -l -n -q -b readData.cc\(\"$ch\",${cat}\) indfit.cc\(\"$ch\",${cat}\)
 bash readParam_single_${ch}_cat${cat}.sh $ch $cat
 root -l -n -b -q "plotVar_fitInd_${ch}_cat${cat}.C"
+python checkParams.py rewriteParamstxt.py
 bash readParam_ind_pol1.sh $ch $cat
 root -l -n -q -b readData.cc\(\"$ch\",${cat}\) simfit_${ch}_cat${cat}.cc\(\"$ch\",${cat}\)
 
-cp params/indiFit_param_all_${ch}_cat${cat}.png params/indiFit_param_all_${ch}_cat${cat}.pdf ~/www/params_quad9_withMassDep/
-cp fixParamFit/Resolution_MH*_${ch}_cat${cat}_fixParam.png ~/www/params_quad9_withMassDep/fixParamFit
 
 

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #channels=(4e 2e2mu 4mu)
-channels=(2e2mu) # 4e 4mu)
-icat=8
+channels=(2e2mu 4e 4mu)
+icat=0
 quad=9
 cur=$PWD
 echo $cur
@@ -19,6 +19,7 @@ for subdir in ${dirs[@]};do
 if [ ! -d ${subdir} ]; then mkdir $subdir; fi
 done
 
+if [ ! -d "Quad9_tree" ];then bash rewriteTree.sh $quad;fi
 
 for ch in ${channels[@]}; do
 dmasscat=${icat}

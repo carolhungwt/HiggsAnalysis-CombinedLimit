@@ -1,11 +1,6 @@
 #include "resofit.h"
 #include <fstream>
-#include "ZZAnalysis/AnalysisStep/interface/Category.h"
-#include "ZZAnalysis/AnalysisStep/src/Category.cc"
-#include "ZZAnalysis/AnalysisStep/interface/Discriminants.h"
-#include "ZZAnalysis/AnalysisStep/src/Discriminants.cc"
-#include "ZZAnalysis/AnalysisStep/src/cConstants.cc"
- #include "ZZAnalysis/AnalysisStep/interface/cConstants.h"
+
 using namespace std;
 
 
@@ -21,7 +16,7 @@ void WriteTree(TString tag = "4e", int quad = 9){
                	for(int i=0; i<maxMassBin; i++){
 	// Read the original tree
 
-	TString types[5]={"ggH","VBFH","WminusH","WplusH","ZH"};
+	TString types[]={"ggH"}; //,"VBFH","WminusH","WplusH","ZH"};
 	TChain* oldtree = new TChain("ZZTree/candTree");
 
 	for(int type=0; type<sizeof(types)/sizeof(*types); type++){
@@ -53,7 +48,7 @@ float p_HadZH_SIG_ghz1_1_JHUGen_JECNominal;
 //float ZZMass;
 float PFMET;
 bool useVHMETTagged=0;
-bool useQGTagging=1;
+bool useQGTagging=0;
 	//short genFinalState=0,ZZsel=0,Z1Flav=0,Z2Flav=0;
 	float GenHMass=0,genHEPMCweight=0,PUWeight=0,dataMCWeight=0;
 
@@ -146,17 +141,13 @@ oldtree->SetBranchAddress("PFMET",&PFMET);
 			lowcut = 0;}
 			else {lowcut = cutoff[j-1];}
 		for(int i=0; i<nEntries ; i++){
+
 			oldtree->GetEntry(i);
                 	
-		//if(tag=="4mu" && Z1Flav*Z2Flav != 28561) continue;
-         	//if(tag=="4e" && Z1Flav*Z2Flav != 14641) continue;	
-         	//if(tag=="2e2mu" && Z1Flav*Z2Flav != 20449) continue;	
-	
 		if(((tag=="4mu" && Z1Flav*Z2Flav == 14641)||(tag=="4e" && Z1Flav*Z2Flav == 28561)||(tag=="2e2mu" && Z1Flav*Z2Flav == 20449))&&(/*overallEventWeight*/ ZZMassErrCorr/ZZMass > lowcut && /*overallEventWeight*/ZZMassErrCorr/ZZMass < upcut))
 		{
-		//	if (overallEventWeight* ZZMassErrCorr/ZZMass > lowcut && overallEventWeight *ZZMassErrCorr/ZZMass < upcut)
+
 			selectchan(Z1Flav*Z2Flav, chan);
-//			calculate_dbkgkin(p_GG_SIG_ghg2_1_ghz1_1_JHUGen, p_QQB_BKG_MCFM, Z1Flav*Z2Flav, ZZMass, dbkg_kin);
 			cconstant = constsp->Eval(ZZMass);
 			dbkg_kin = p_GG_SIG_ghg2_1_ghz1_1_JHUGen/(p_GG_SIG_ghg2_1_ghz1_1_JHUGen + p_QQB_BKG_MCFM*cconstant);
 			calculate_Dmass(ZZMassErrCorr, ZZMass, Dmass);
@@ -182,49 +173,6 @@ oldtree->SetBranchAddress("PFMET",&PFMET);
 		newFile->WriteTObject(newtrees[j]);
 	}
 
-			entries.push_back(counter);
-			untagged_entries.push_back(counter);
-			vbf2j_entries.push_back(counter);
-			vhlep_entries.push_back(counter);	
-		
-
-
-	// Writing cutoff to txt files for quick access
-	std::vector<std::string> cutoff_str;
-	for(int k=0; k<4; k++){
-		if(k==0){
-				cutoff_str.push_back("Total:    ");
-				for(int i =0; i<entries.size(); i++)
-				cutoff_str.push_back(to_string(entries[i]));
-				
-			}
-
-		else if(k==1){
-				cutoff_str.push_back("Untagged:    ");
-				for(int i =0; i<untagged_entries.size(); i++)
-				cutoff_str.push_back(to_string(untagged_entries[i]));
-			}
-		else if(k==2){
-				cutoff_str.push_back("VBF2J:    ");
-				for(int i =0; i<vbf2j_entries.size(); i++)
-				cutoff_str.push_back(to_string(vbf2j_entries[i]));
-			}	
-		else{
-				cutoff_str.push_back("VHlep:    ");
-				for(int i =0; i<vhlep_entries.size(); i++){
-				cutoff_str.push_back(to_string(vhlep_entries[i]));
-			}
-		}
-		cutoff_str.push_back("\n");
-	}
-
-//	if 
-	std::ofstream output_txt("./Quad"+to_string(quad)+"_tree/MH"+to_string(massBin[i])+"_"+tag+"_check_entries.txt");
-	std::ostream_iterator<std::string> output_iterator(output_txt, " ");
-	std::copy(cutoff_str.begin(), cutoff_str.end(), output_iterator);
-	newFile->Close(); 
-	//delete f;
-	//delete newfile;
 }	
 }
 std::runtime_error invalidinput("invalid input check ZZFlav");
@@ -246,10 +194,4 @@ void calculate_Dmass(float ZZMassErrCorr, float ZZMass, float &Dmass){
 	Dmass = ZZMassErrCorr/ZZMass;
 	return;
 }
-
-void calculate_dbkgkin(float p_GG_SIG_ghg2_1_ghz1_1_JHUGen, float p_QQB_BKG_MCFM, int ZZflav, float ZZMass, float &dbkg_kin){
-	dbkg_kin = p_GG_SIG_ghg2_1_ghz1_1_JHUGen / ( p_GG_SIG_ghg2_1_ghz1_1_JHUGen + p_QQB_BKG_MCFM*getDbkgkinConstant(ZZflav,ZZMass) );
-	return;
-}
-
 
